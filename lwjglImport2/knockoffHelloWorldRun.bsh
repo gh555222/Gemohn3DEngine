@@ -1,0 +1,2 @@
+#!/bin/bash
+DISPLAY=192.168.179.2:1 java -cp ".:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*" -Djava.library.path=natives1 porting1.GLApp_cubesAndView

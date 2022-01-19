@@ -1,0 +1,2 @@
+#!/bin/bash
+javac -cp ".:../lwjgl20200512.d/*" default1/HelloWorld.java

@@ -1,0 +1,4 @@
+#!/bin/bash
+javac -cp ".:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*" porting1/GLApp_cubesAndView.java
+sha256sum porting1/GLApp_cubesAndView.class
+./knockoffHelloWorldRun.bsh

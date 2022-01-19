@@ -1,0 +1,2 @@
+#!/bin/bash
+javac -cp ".:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*" default1/GLApp_Demo_HelloWorld.java

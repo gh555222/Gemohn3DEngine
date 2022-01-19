@@ -1,0 +1,115 @@
+cvp 0 0 0
+cvm 0.5 0.5 0.5
+cvm 1 1 1
+//color 0.25 0.25 0.25
+//quad1
+//quad2
+//quad3
+quad4
+//quad5
+//quad6
+cvm 1 1 1
+cvp 0 0 1
+cvm 1 1 1
+//top face 
+quad4
+//bottom face
+//quad3
+//back face
+//quad1
+//left face
+//quad2
+//front face
+quad5
+//right face
+quad6
+cvp 0 1 1
+quad1
+quad5
+//demo texture on side of voxel
+//front face
+cvpr
+cvm 0.25 0 0
+cvp -0.25 -0.25 0.25
+cvp 1 1 0.5
+quad5
+cvp 0 0.5 0
+quad5
+cvp 0.5 -0.5 0
+quad5
+cvp 0 0.5 0
+quad5
+//demo texture on side of voxel
+//back face
+cvpr
+cvm 0.5 0 0
+cvm 0.5 0 0
+cvp -0.25 -0.25 0.25
+cvp 1 1 1
+//back face
+quad1
+cvp 0 0.5 0
+quad1
+cvp 0.5 -0.5 0
+quad1
+cvp 0 0.5 0
+quad1
+//advanced texture test
+cvpr
+cvm 0.125 0 0
+cvp -0.125 -0.125 0.125
+cvp 1 1 2
+cvp 0.25 0 0
+color 0.5 0.5 0.5
+quad1
+cvp 0.25 0 0
+color 0.99609375 0.0 0.0
+quad1
+cvp 0.25 0 0
+color 0.0 0.1015625 0.99609375
+quad1
+cvp 0.25 0 0
+color 0.99609375 0.99609375 0.99609375
+quad1
+cvp -1 0.25 0 0
+cvp 0.25 0 0
+color 0.5 0.5 0.5
+quad1
+cvp 0.25 0 0
+color 0.99609375 0.0 0.0
+quad1
+cvp 0.25 0 0
+color 0.0 0.1015625 0.99609375
+quad1
+cvp 0.25 0 0
+color 0.99609375 0.99609375 0.99609375
+quad1
+cvp -1 0.25 0 0
+cvp 0.25 0 0
+color 0.5 0.5 0.5
+quad1
+cvp 0.25 0 0
+color 0.0 0.0 0.0
+quad1
+cvp 0.25 0 0
+color 0.0 0.1015625 0.99609375
+quad1
+cvp 0.25 0 0
+color 0.99609375 0.99609375 0.99609375
+quad1
+cvp -1 0.25 0 0
+cvp 0.25 0 0
+color 0.62890625 0.96484375 0.0
+quad1
+cvp 0.25 0 0
+color 0.62890625 0.96484375 0.0
+quad1
+cvp 0.25 0 0
+color 0.62890625 0.96484375 0.0
+quad1
+cvp 0.25 0 0
+color 0.62890625 0.96484375 0.0
+quad1
+cvp -1 0.25 0 0
+
+

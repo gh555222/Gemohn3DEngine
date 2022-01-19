@@ -1,0 +1,12 @@
+#!/bin/bash
+cd $(dirname $(dirname $(readlink -f $0)))
+sha256sum porting20211219/ColoredTriangle.class
+#javac -cp ".:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*" porting20211219/ColoredTriangle.java &&
+#javac -cp ".:./porting20211219/jackson-core-2.13.0.jar:./porting20211219/jackson-annotations-2.11.0.wso2v1.jar:./porting20211219/jackson-databind-2.11.0.wso2v1.jar:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*" porting20211219/ColoredTriangle.java &&
+javac -cp ".:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*" porting20211219/ColoredTriangle.java &&
+#/home/u_audio/jre1.8.0_92/bin/javac -cp ".:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*" porting20211219/ColoredTriangle.java &&
+#/usr/lib/jvm/java-8-openjdk-amd64/bin/javac -cp ".:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*" porting20211219/ColoredTriangle.java &&
+#/usr/lib/jvm/jdk-17/bin/javac
+#java -cp ".:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*:./porting20211219/jackson-core-2.13.0.jar:./porting20211219/jackson-annotations-2.11.0.wso2v1.jar:./porting20211219/jackson-databind-2.11.0.wso2v1.jar" -Djava.library.path=natives1 porting20211219.ColoredTriangle
+java -cp ".:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*" -Djava.library.path=natives1 porting20211219.ColoredTriangle
+sha256sum porting20211219/ColoredTriangle.class

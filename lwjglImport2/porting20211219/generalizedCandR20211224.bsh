@@ -1,0 +1,8 @@
+#!/bin/bash
+cd $(dirname $(dirname $(readlink -f $0)))
+pn1=$1
+progn=$(echo $(dirname $(echo $pn1'a' | tr '.' '\n' | grep -v -E "^java$" | tr '\n' '/')) | tr '/' '.')
+echo $progn
+echo $pn1
+javac -cp ".:./porting20211219/jackson-core-2.13.0.jar:./porting20211219/jackson-annotations-2.11.0.wso2v1.jar:./porting20211219/jackson-databind-2.11.0.wso2v1.jar:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*" porting20211219/"$1" &&
+java -cp ".:../lwjgl20200512_2.d/lwjgl-2.9.3/jar/*:./porting20211219/jackson-core-2.13.0.jar:./porting20211219/jackson-annotations-2.11.0.wso2v1.jar:./porting20211219/jackson-databind-2.11.0.wso2v1.jar" -Djava.library.path=natives1 porting20211219."$progn"

@@ -1,0 +1,34 @@
+reset
+//cvp 0 0 1
+cvm 0.5 0.5 0.5
+cvm 1 1 1
+//quad1
+quad5
+quad4
+cvp 0 0 1
+//color 0.25 0.25 0.25
+//quad1
+quad2
+quad3
+quad4
+//quad5
+color 0.5 0.5 0.5
+quad6
+reset
+cvm 0.5 0.5 0.5
+cvp 0 0 2
+quad3
+quad4
+reset
+//extf pixel_commands.txt
+extf x0y0z0_backQuadMystery.txt
+extf x0y0z0_frontQuadCobblestone.txt
+//extfvbo extfvbo_x0y0z0_backQuadCobblestone.txt
+//extfvbo extfvbo_x0y0z0_frontQuadCobblestone.txt
+extf x0y0z0_leftQuadCobblestone.txt
+extf x0y0z0_rightQuadCobblestone.txt
+extf x0y0z0_topQuadCobblestone.txt
+extf x0y0z0_bottomQuadCobblestone.txt
+
+//extfvbo extfvbo_topQuadCobblestoneFlatChunk.txt
+extf extfvbo_topQuadMysteryFlatChunk.txt
