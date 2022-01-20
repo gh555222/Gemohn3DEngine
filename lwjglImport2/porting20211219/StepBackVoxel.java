@@ -1,5 +1,6 @@
 package porting20211219;
 import porting20211219.StartVoxel;
+import porting20211219.vboVoxel;
 import java.util.ArrayList;
 import java.nio.FloatBuffer;
 import org.lwjgl.BufferUtils;
@@ -14,7 +15,8 @@ enum ComplexVoxCmd{
 */
 public class StepBackVoxel{
 	String cmdline;
-	public class Vbo{
+	public vboVoxel myVbo;
+	/*public class Vbo{
 		public int vertices; //number of vertices
 		int vertex_handle;
 		int color_handle;
@@ -39,18 +41,24 @@ public class StepBackVoxel{
 			this(4);
 		}
 	}
-	Vbo myVbo;
+	Vbo myVbo;*/
 	//static final int quad1=1,quad2=2,quad3=3,quad4=4,quad5=5,quad6=6,cvm=7,cvp=8,no_op=9;
 	int size;
 	int nextdat=0;
+	String fname;
+	int ttl;
 	String dump;
+	//myStepBack.addQuadToVbo(myStepBack.myVbo,0,1,5,4,vert,color);
 	public StepBackVoxel(){
 		this(10);
 	}
 	public StepBackVoxel(int size1){
-		myVbo = new Vbo(size1);
+		//myVbo = new Vbo(size1);
+		myVbo = new vboVoxel();
 	}
 	public StepBackVoxel(int size1, String fname){
-		myVbo = new Vbo(size1, fname);
+		//myVbo = new Vbo(size1, fname);
+		ttl=64;
+		myVbo = new vboVoxel();
 	}
 }

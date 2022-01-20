@@ -53,6 +53,7 @@ default map initialization function
 
 */
 public class ColoredTriangle {
+	public StepBackVoxel myStepBack = new StepBackVoxel();
 	FastVoxel map = new FastVoxel();
 	 int[][] qquadvals = new int[][]{
 		{0,3,2,1}, //z+
@@ -100,65 +101,6 @@ public class ColoredTriangle {
 	void WFglVertex3fv(float[] a){
 		GL11.glVertex3f(a[0],a[1],a[2]);
 	}
-	//previously quad_oflib for original WF (wieldfield.com) C standard name
-	public void paintVbo(StepBackVoxel.Vbo vbo){
-	}
-	/*
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vbo.vertex_handle);
-		GL11.glVertexPointer(vbo.vertex_size, GL11.GL_FLOAT, 0, 0l);
-
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vbo.color_handle);
-		GL11.glColorPointer(vbo.color_size, GL11.GL_FLOAT, 0, 0l);
-
-		GL11.glEnableClientState(GL15.GL_ARRAY_BUFFER);
-		//GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
-		GL11.glEnableClientState(GL11.GL_COLOR_ARRAY);
-		System.out.println("paintVbo: "+vbo.vertices+" "+vbo.vertex_size+" "+vbo.color_size);
-		GL11.glDrawArrays(GL11.GL_QUADS, 0, vbo.vertices/2);
-
-		GL11.glDisableClientState(GL11.GL_COLOR_ARRAY);
-		//GL11.glDisableClientState(GL11.GL_VERTEX_ARRAY);
-		GL11.glDisableClientState(GL15.GL_ARRAY_BUFFER);
-	}
-	*/
-	public void addQuadToVbo(StepBackVoxel.Vbo vbo,int a,int b,int c, int d){
-	}
-	/*
-		try{
-			addQuadToVbo(vbo,a,b,c,d,true);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-	*/
-	public void addQuadToVbo(StepBackVoxel.Vbo vbo,int a,int b,int c, int d, boolean next){
-	}/*
-		//System.out.println("addQuadToVbo()");
-		vbo.vertices=vbo.vertices+4; //add a quad's worth of vertices
-		vbo.vertex_data.put(new float[] {ver[a][0], ver[a][1], ver[a][2]} );	
-		vbo.vertex_data.put(new float[] {ver[b][0], ver[b][1], ver[b][2]} );	
-		vbo.vertex_data.put(new float[] {ver[c][0], ver[c][1], ver[c][2]} );	
-		vbo.vertex_data.put(new float[] {ver[d][0], ver[d][1], ver[d][2]} );	
-		
-		vbo.color_data.put(new float[] {color[a][0], color[a][1], color[a][2]} );	
-		vbo.color_data.put(new float[] {color[b][0], color[b][1], color[b][2]} );	
-		vbo.color_data.put(new float[] {color[c][0], color[c][1], color[c][2]} );	
-		vbo.color_data.put(new float[] {color[d][0], color[d][1], color[d][2]} );	
-		
-		vbo.color_data.flip();
-		//
-		vbo.vertex_handle = GL15.glGenBuffers();
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vbo.vertex_handle);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vbo.vertex_data, GL15.GL_STATIC_DRAW);
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-
-		vbo.color_handle = GL15.glGenBuffers();
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vbo.color_handle);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, vbo.color_data, GL15.GL_STATIC_DRAW);
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-
-	}
-	*/
 	public void quad(int a,int b,int c,int d)
 	{
 		//System.out.println(GL11.GL_TRIANGLES);
@@ -176,6 +118,9 @@ public class ColoredTriangle {
 		WFglVertex3fv(ver[d]);
 		GL11.glEnd();
 	}
+	public void quad3(int a,int b,int c,int d){
+		myStepBack.myVbo.writeQuad(ver, color, new int[]{a, b, c, d} );
+	}
 	public void quad2(int a,int b,int c,int d, float[][] color1, float[][]ver1)
 	{
 		GL11.glBegin(GL11.GL_QUADS);
@@ -192,7 +137,6 @@ public class ColoredTriangle {
 		WFglVertex3fv(ver1[d]);
 		GL11.glEnd();
 	}
-	public StepBackVoxel myStepBack = new StepBackVoxel();
 	public void pullCmd(){
 		System.out.println("pullCmd");
 		Console c = System.console();
@@ -284,99 +228,82 @@ public class ColoredTriangle {
 			if(0==cmds[i].compareTo("quad1")){
 				if(ext_mode==MODE_EXEC_NORM){ quad(0,3,2,1); }
 				else if(ext_mode==MODE_EXEC_CACHE_VBO){
-					addQuadToVbo(myStepBack.myVbo,0,3,2,1);
+					//myStepBack.addQuadToVbo(myStepBack.myVbo,0,3,2,1,vert,color);
+					int tmpi=0;
+					quad3(qquadvals[tmpi][0], qquadvals[tmpi][1], qquadvals[tmpi][2], qquadvals[tmpi][3]);
 				}
 			}else if(0==cmds[i].compareTo("quad2")){
 				if(ext_mode==MODE_EXEC_NORM){ quad(2,3,7,6);}
 				else if(ext_mode==MODE_EXEC_CACHE_VBO){
-					addQuadToVbo(myStepBack.myVbo,2,3,7,6);
+					//myStepBack.addQuadToVbo(myStepBack.myVbo,2,3,7,6,vert,color);
+					int tmpi=1;
+					quad3(qquadvals[tmpi][0], qquadvals[tmpi][1], qquadvals[tmpi][2], qquadvals[tmpi][3]);
 				}
 			}else if(0==cmds[i].compareTo("quad3")){
 				if(ext_mode==MODE_EXEC_NORM){ quad(0,4,7,3);}
 				else if(ext_mode==MODE_EXEC_CACHE_VBO){
-					addQuadToVbo(myStepBack.myVbo,0,4,7,3);
+					//myStepBack.addQuadToVbo(myStepBack.myVbo,0,4,7,3,vert,color);
+					int tmpi=2;
+					quad3(qquadvals[tmpi][0], qquadvals[tmpi][1], qquadvals[tmpi][2], qquadvals[tmpi][3]);
 				}
 			}else if(0==cmds[i].compareTo("quad4")){
 				if(ext_mode==MODE_EXEC_NORM){ quad(1,2,6,5);}
 				else if(ext_mode==MODE_EXEC_CACHE_VBO){
-					addQuadToVbo(myStepBack.myVbo,1,2,6,5);
+					//myStepBack.addQuadToVbo(myStepBack.myVbo,1,2,6,5,vert,color);
+					int tmpi=3;
+					quad3(qquadvals[tmpi][0], qquadvals[tmpi][1], qquadvals[tmpi][2], qquadvals[tmpi][3]);
 				}
 			}else if(0==cmds[i].compareTo("quad5")){
 				if(ext_mode==MODE_EXEC_NORM){ quad(4,5,6,7);}
 				else if(ext_mode==MODE_EXEC_CACHE_VBO){
-					addQuadToVbo(myStepBack.myVbo,4,5,6,7);
+					//myStepBack.addQuadToVbo(myStepBack.myVbo,4,5,6,7,vert,color);
+					int tmpi=4;
+					quad3(qquadvals[tmpi][0], qquadvals[tmpi][1], qquadvals[tmpi][2], qquadvals[tmpi][3]);
 				}
 			}else if(0==cmds[i].compareTo("quad6")){
 				if(ext_mode==MODE_EXEC_NORM){ quad(0,1,5,4);}
 				else if(ext_mode==MODE_EXEC_CACHE_VBO){
-					addQuadToVbo(myStepBack.myVbo,0,1,5,4);
+					//myStepBack.addQuadToVbo(myStepBack.myVbo,0,1,5,4,vert,color);
+					int tmpi=5;
+					quad3(qquadvals[tmpi][0], qquadvals[tmpi][1], qquadvals[tmpi][2], qquadvals[tmpi][3]);
 				}
 			}else if(0==cmdargv[0].compareTo("cvp")){
 				//System.out.println(Float.valueOf(cmdargv[1])+" "+Float.valueOf(cmdargv[2])+" "+Float.valueOf(cmdargv[3]));
-				changeVertPos(Float.valueOf(cmdargv[1]), Float.valueOf(cmdargv[2]), Float.valueOf(cmdargv[3]));
+				if(ext_mode==MODE_EXEC_NORM){
+					changeVertPos(Float.valueOf(cmdargv[1]), Float.valueOf(cmdargv[2]), Float.valueOf(cmdargv[3]));
+				}else if(ext_mode==MODE_EXEC_CACHE_VBO){
+					changeVertPos2(Float.valueOf(cmdargv[1]), Float.valueOf(cmdargv[2]), Float.valueOf(cmdargv[3]), 1.0f);
+				}
 			}else if(0==cmdargv[0].compareTo("extf")){
 				//System.out.println(cmdargv[1]);
 				testGen(cmdargv[1]);
 				drawMap(myStepBack.cmdline, MODE_EXEC_DEFAULT);
 			}else if(0==cmdargv[0].compareTo("extfvbo")){
-				//iterate through cache before evaluating if we must 
-				//read the file *for real*, or call a pre-existing VBO
-				//from cache
-				int efvi=0;
-				if(extfcache.size()==0){
-					testGen(cmdargv[1]);
-					drawMap(myStepBack.cmdline, MODE_EXEC_CACHE_VBO);
-					myStepBack.myVbo.filename=cmdargv[0];
-					extfcache.add(myStepBack);
-					//paintVbo(extfcache.get(efvi).myVbo);
-					paintVbo(myStepBack.myVbo);
-				}
-				for(;1==1;efvi=efvi+1){
-					//read a cached record and evaluate if the record is for our
-					//file (and if its not, just goto the next one using the for-loop above, again)
-					if(efvi<extfcache.size()){
-						
-					}else{
-						extfcache.add(myStepBack);
-						paintVbo(myStepBack.myVbo);
-						break;
-					}
-					if(0==extfcache.get(efvi).myVbo.filename.compareTo(cmdargv[1])){
-						//record inquired about is in fact for our present extfvbo command
-						System.out.println("extfvbo: ttl: "+extfcache.get(efvi).myVbo.ttl);
-						if(extfcache.get(efvi).myVbo.ttl==0){
-							//load file from disk, and invoke new instance of present function
-							//to process commands within said file
-							extfcache.remove(efvi);
-							testGen(cmdargv[1]);
-							drawMap(myStepBack.cmdline, MODE_EXEC_CACHE_VBO);
-							paintVbo(extfcache.get(efvi).myVbo);
-							break;
-						}else if(extfcache.get(efvi).myVbo.ttl>0){
-							//cache unexpired, reduce ttl and paint as needed
-							paintVbo(extfcache.get(efvi).myVbo);
-							extfcache.get(efvi).myVbo.ttl-=1;
-						}else{
-							System.out.println("extfvbo: TTL_NOT_GREATER_THAN_OR_EQUAL_TO_0");
+				testGen(cmdargv[1]);
+				boolean needsBuilt=false;
+				//iterate over cache of vbos
+				for(StepBackVoxel sbvitem : extfcache){
+					if(0==sbvitem.fname.compareTo(cmdargv[1])){
+						//vbo cache record died, rebuild cache record from configuration file
+						if(sbvitem.ttl<1){
+							sbvitem.ttl=64;
+							needsBuilt=true;
 						}
+						sbvitem.ttl-=1;
+						System.out.println("ttl remaining on "+sbvitem.fname+": "+sbvitem.ttl);
 					}
 				}
-				System.out.println("extfvbo: "+efvi);
-				//backup present StepBackVoxel
-				//StepBackVoxel tmp = myStepBack;
-				//create new record in extfcache
-				//if(efvi==extfcache.size()){
-				//	extfcache.add(myStepBack);
-				//refresh/re-cache vbo record from on-disk commands list file
-				//}else if(efvi<extfcache.size()){
-				//	extfcache.remove(efvi);
-				//	extfcache.add(myStepBack);
-				//sanity check failed, fallacious error condition (program shall continue running >:O )
-				//}else{
-				//	System.out.println("extfvbo: EFVI_NOT_LESS_THAN_OR_EQUAL_TO_0");
-				//}
-				//restore StepBackVoxel from backup
-				//myStepBack = tmp;
+				if(extfcache.toArray().length<1){
+					needsBuilt=true;
+				}
+				if(needsBuilt==true){
+					System.out.println("MODE_EXEC_CACHE_VBO: Construction Started!");
+					myStepBack.fname=cmdargv[1];
+					drawMap(myStepBack.cmdline, MODE_EXEC_CACHE_VBO);
+				}else{
+					myStepBack.myVbo.paintVbo();
+				}
+				//
 			}else if(0==cmdargv[0].compareTo("cvm")){
 				changeVertMul(Float.valueOf(cmdargv[1]));
 			}else if(0==cmdargv[0].compareTo("color")){
@@ -405,10 +332,12 @@ public class ColoredTriangle {
 			//vbo cache exec mode only commands:
 			}else if(ext_mode==MODE_EXEC_CACHE_VBO){
 				if(0==cmdargv[0].compareTo("alloc")){
-					System.out.println("MODE_EXEC_CACHE_VBO: alloc: "+cmdargv[1]);
-					myStepBack.myVbo = (new StepBackVoxel()).new Vbo(Integer.valueOf(cmdargv[1]));
+					//System.out.println("MODE_EXEC_CACHE_VBO: alloc: "+cmdargv[1]);
+					//myStepBack.myVbo = (new StepBackVoxel()).new Vbo(Integer.valueOf(cmdargv[1]));
 				}else if(0==cmdargv[0].compareTo("close")){
+					myStepBack.myVbo.genVbo();
 					extfcache.add(myStepBack);
+					myStepBack.myVbo.paintVbo();
 				}
 			}
 		}
@@ -419,6 +348,15 @@ public class ColoredTriangle {
 				ver[i][i2]=ver[i][i2]*size;
 			}
 		}
+	}
+	public void changeVertPos2(float x, float y, float z, float pol){
+		for(int i=0;i<8;i++){
+			int i2=0;
+			ver[i][i2]=ver[i][i2]+x*pol; i2++;
+			ver[i][i2]=ver[i][i2]+y*pol; i2++;
+			ver[i][i2]=ver[i][i2]+z*pol; 
+		}
+
 	}
 	public void changeVertPos(float x, float y, float z){
 		for(int i=0;i<8;i++){

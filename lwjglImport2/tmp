@@ -22,13 +22,15 @@ quad4
 reset
 //extf pixel_commands.txt
 extf x0y0z0_backQuadMystery.txt
-extf x0y0z0_frontQuadCobblestone.txt
+//extfvbo x0y0z0_frontQuadCobblestone.txt
+ext x0y0z0_frontQuadCobblestone.txt
 //extfvbo extfvbo_x0y0z0_backQuadCobblestone.txt
 //extfvbo extfvbo_x0y0z0_frontQuadCobblestone.txt
 extf x0y0z0_leftQuadCobblestone.txt
-extf x0y0z0_rightQuadCobblestone.txt
+extfvbo x0y0z0_rightQuadCobblestone.txt
 extf x0y0z0_topQuadCobblestone.txt
 extf x0y0z0_bottomQuadCobblestone.txt
 
-//extfvbo extfvbo_topQuadCobblestoneFlatChunk.txt
-extf extfvbo_topQuadMysteryFlatChunk.txt
+//extf extfvbo_topQuadMysteryFlatChunk.txt
+//extfvbo extfvbo_topQuadMysteryFlatChunk.txt
+//extfvbo extftmp512k.txt
